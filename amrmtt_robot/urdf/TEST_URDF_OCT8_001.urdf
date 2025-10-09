@@ -1,0 +1,393 @@
+<?xml version="1.0" ?>
+<robot name="amrmtt_robot">
+
+  <link name="base_link">
+    <inertial>
+      <origin 
+        rpy="0 0 0" 
+        xyz="0.034512 0.2433 -0.014732"/>
+      <mass value="52.884"/>
+      <inertia 
+        ixx="0.31942" 
+        ixy="0.00054994" 
+        ixz="-0.0020306" 
+        iyy="0.71823" 
+        iyz="0.00095034" 
+        izz="0.54119"/>
+      </inertial>
+    <visual>
+       <origin rpy="1.5707 0 3.1414" xyz="0 0 0"/>
+      
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/Chassis_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.89804 0.91765 0.92941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/Chassis_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="Left_Wheel_Link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-4.7744E-05 -1.1722E-06 -0.0039873"/>
+      <mass value="7.4872"/>
+      <inertia 
+        ixx="0.023075" 
+        ixy="-4.1552E-07" 
+        ixz="-3.6593E-06" 
+        iyy="0.023091" 
+        iyz="-9.4815E-08" 
+        izz="0.043271"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/Left_Wheel_Link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.52941 0.54902 0.54902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/Left_Wheel_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="Left_wheel_center_Point"
+    type="continuous">
+    <origin
+      xyz="9.6581E-05 0.19 0.075"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Left_Wheel_Link" />
+    <axis
+      xyz="0 0 -1" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
+  </joint>
+
+  <link name="Right_Wheel_Link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="4.5224E-05 -1.848E-05 0.0040127"/>
+      <mass value="7.4872"/>
+      <inertia ixx="0.023077" ixy="5.6217E-06" ixz="-3.3885E-06" iyy="0.023088" iyz="1.3847E-06" izz="0.043271"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/Right_Wheel_Link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.52941 0.54902 0.54902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/Right_Wheel_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="Right_wheel_center_Point"
+    type="continuous">
+    <origin
+      xyz="9.6581E-05 -0.19 0.075"
+      rpy="1.5708 0 0" />
+            <!-- xyz="9.6581E-05 0.19 0.075"
+      rpy="1.5708 0 0" /> -->
+    <parent
+      link="base_link" />
+    <child
+      link="Right_Wheel_Link" />
+    <axis
+      xyz="0 0 -1" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
+  </joint>
+
+  <link name="L_B_Caster_W_Link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0373 -0.044583 -9.6163E-05"/>
+      <mass value="1.0016"/>
+      <inertia ixx="0.00047167" ixy="5.3397E-06" ixz="-1.7075E-08" iyy="0.0004975" iyz="7.2771E-08" izz="0.00076381"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/L_B_Caster_W_Link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.75294 0.75294 0.75294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/L_B_Caster_W_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="L_B_Caster_W_Center_Ponit"
+    type="fixed">
+    <origin
+      xyz="0.3 -0.15 0.06"
+      rpy="1.5708 0 0" />
+            <!-- xyz="0.3 0.15 0.06"
+      rpy="1.5708 0 0" /> -->
+    <parent
+      link="base_link" />
+    <child
+      link="L_B_Caster_W_Link" />
+    <axis
+      xyz="0 0 0" />
+    <!-- <dynamics
+      damping="0.1"
+      friction="0.1" /> -->
+  </joint>
+
+  <link name="L_F_Caster_W_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0372999512874298 -0.0445834915476717 -9.61633773850501E-05"/>
+      <mass value="1.00160815383293"/>
+      <inertia ixx="0.000471671395328203" ixy="5.33970093952103E-06" ixz="-1.70749025931039E-08" iyy="0.000497502515737664" iyz="7.27706825064735E-08" izz="0.000763807744833162"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/L_F_Caster_W_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.75294 0.75294 0.75294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/L_F_Caster_W_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="L_F_Caster_W_Center_Ponit"
+    type="fixed">
+    <origin
+      xyz="-0.2945 -0.15 0.06"
+      rpy="1.5708 0 0" />
+      <!-- xyz="-0.2945 0.15 0.06"
+      rpy="1.5708 0 0" /> -->
+    <parent
+      link="base_link" />
+    <child
+      link="L_F_Caster_W_link" />
+    <axis
+      xyz="0 0 0" />
+    <!-- <dynamics
+      damping="0.1"
+      friction="0.1" /> -->
+  </joint>
+
+  <link name="R_F_Caster_W_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0373 -0.044583 -9.6163E-05"/>
+      <mass value="1.0016"/>
+      <inertia ixx="0.00047167" ixy="5.3397E-06" ixz="-1.7075E-08" iyy="0.0004975" iyz="7.2771E-08" izz="0.00076381"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/R_F_Caster_W_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.75294 0.75294 0.75294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/R_F_Caster_W_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="R_F_Caster_W_Center_Ponit"
+    type="fixed">
+    <origin
+      xyz="-0.2945 0.15 0.06"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="R_F_Caster_W_link" />
+    <axis
+      xyz="0 0 0" />
+    <!-- <dynamics
+      damping="0.1"
+      friction="0.1" /> -->
+  </joint>
+
+  <link name="R_B_Caster_W_Link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0373 -0.044583 -9.6163E-05"/>
+      <mass value="1.0016"/>
+      <inertia ixx="0.00047167" ixy="5.3397E-06" ixz="-1.7075E-08" iyy="0.0004975" iyz="7.2771E-08" izz="0.00076381"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/R_B_Caster_W_Link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.75294 0.75294 0.75294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/R_B_Caster_W_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="R_B_Caster_W_Center_Ponit"
+    type="fixed">
+    <origin
+      xyz="0.3 0.15 0.06"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="R_B_Caster_W_Link" />
+    <axis
+      xyz="0 0 0" />
+    <!-- <dynamics
+      damping="0.1"
+      friction="0.1" /> -->
+  </joint>
+
+  <!-- ############################################ Center_Wheels ############################################ -->
+
+
+
+
+
+  <!-- ############################################ Lidar ############################################ -->
+  <link name="L_F_Lidar_Link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0026211 -0.052053 -0.0026217"/>
+      <!-- <origin rpy="0 0 3.1416" xyz="0 0 0"/> -->
+
+      <mass value="0.28431"/>
+      <inertia ixx="0.00017482" ixy="-9.9427E-06" ixz="-6.4558E-06" iyy="0.00013429" iyz="9.9411E-06" izz="0.00017484"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/L_F_Lidar_Link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <!-- <origin rpy="0 0 3.1416" xyz="0 0 0"/> -->
+
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/L_F_Lidar_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="L_F_Lidar_Center_Point"
+    type="fixed">
+
+    <!-- สูตร คำนวณ เรเดียน = องศา * (3.14/180) -->
+    
+    <origin
+      xyz="-0.3459 -0.195 0.207"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="L_F_Lidar_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <!-- ############################################ Lidar ############################################ -->
+
+
+
+  <!-- ############################################ Lidar ############################################ -->
+  <link name="R_B_Lidar_Link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.0026219 -0.052053 0.0026209"/>
+      <!-- <origin rpy="0 0 3.1416" xyz="0 0 0"/> -->
+      <mass value="0.28431"/>
+      <inertia ixx="0.00017483" ixy="9.9457E-06" ixz="-6.4558E-06" iyy="0.00013429" iyz="-9.9381E-06" izz="0.00017483"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/R_B_Lidar_Link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <!-- <origin rpy="0 0 3.1416" xyz="0 0 0"/> -->
+      <geometry>
+        <mesh filename="package://amrmtt_robot/meshes/R_B_Lidar_Link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="R_B_Lidar_Center_Point"
+    type="fixed">
+    <origin
+      xyz="0.348 0.195 0.207"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="R_B_Lidar_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <!-- ############################################ Lidar ############################################ -->
+
+
+<!--
+
+สูตร คำนวณ เรเดียน = องศา * (3.14/180)
+  
+  | องศา (°)  | เรเดียน (rad) | ใช้บ่อยเมื่อ...                          
+| -/*-*-*-+-+-+-+- | ========= | ==================================== 
+| 0°        | 0             | ไม่หมุน                                  
+| **90°**   | **1.5708**    | หมุนตั้งฉาก (เช่น หันด้านหน้าเป็นด้านบน) 
+| **-90°**  | **-1.5708**   | หมุนกลับทางตรงข้าม                       
+| **180°**  | **3.1416**    | หมุนกลับหลัง                             
+| **-180°** | **-3.1416**   | เหมือนกัน แต่หมุนอีกทิศ                  
+| **45°**   | **0.7854**    | หมุนเฉียง                                
+| **-45°**  | **-0.7854**   | หมุนเฉียงอีกด้าน                         
+| **360°**  | **6.2832**    | หมุนเต็มรอบหนึ่งครั้ง                     
+| **-360°** | **-6.2832**   | หมุนเต็มรอบหนึ่งครั้งในทิศทางตรงกันข้าม  
+  -->
+
+</robot>

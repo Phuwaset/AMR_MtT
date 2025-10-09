@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<robot name="amrmtt_robot"
+    xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- ========================================================= -->
+    <!--  INCLUDE OTHER MACROS -->
+    <!-- ========================================================= -->
+    <!-- <xacro:include filename="$(find-pkg-share amrmtt_robot)/description/inertial_macros.xacro"/> -->
+    <!-- <xacro:include filename="$(dirname ${filename})/inertial_macros.xacro"/> -->
+    <xacro:include filename="inertial_macros.xacro"/>
+
+
+
+    <!-- ========================================================= -->
+    <!--  MATERIAL DEFINITIONS -->
+    <!-- ========================================================= -->
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
+    </material>
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    </material>
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <!-- ========================================================= -->
+    <!--  MAIN MACRO : robot_core -->
+    <!-- ========================================================= -->
+    <xacro:macro name="robot_core" params="mesh_pkg prefix">
+
+        <!-- ========== BASE LINK ========== -->
+        <link name="${prefix}base_link">
+            <inertial>
+                <origin xyz="0.034512 0.2433 -0.014732" rpy="0 0 0"/>
+                <mass value="52.884"/>
+                <inertia ixx="0.31942" ixy="0.00054994" ixz="-0.0020306" iyy="0.71823" iyz="0.00095034" izz="0.54119"/>
+            </inertial>
+
+            <visual>
+                <origin xyz="0 0 0" rpy="1.5707 0 3.1414"/>
+                <geometry>
+                    <mesh filename="package://${mesh_pkg}/meshes/Chassis_link.STL"/>
+                </geometry>
+                <material name="body_white">
+                    <color rgba="0.89804 0.91765 0.92941 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://${mesh_pkg}/meshes/Chassis_link.STL"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- ========== LEFT WHEEL ========== -->
+        <link name="${prefix}Left_Wheel_Link">
+            <inertial>
+                <origin xyz="-4.7744E-05 -1.1722E-06 -0.0039873" rpy="0 0 0"/>
+                <mass value="7.4872"/>
+                <inertia ixx="0.023075" ixy="-4.1552E-07" ixz="-3.6593E-06" iyy="0.023091" iyz="-9.4815E-08" izz="0.043271"/>
+            </inertial>
+
+            <visual>
+                <geometry>
+                    <mesh filename="package://${mesh_pkg}/meshes/Left_Wheel_Link.STL"/>
+                </geometry>
+                <material name="orange">
+                    <color rgba="1 0.3 0.1 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <mesh filename="package://${mesh_pkg}/meshes/Left_Wheel_Link.STL"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}Left_Wheel_Center_Point" type="continuous">
+            <origin xyz="9.6581E-05 0.19 0.075" rpy="1.5708 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}Left_Wheel_Link"/>
+            <axis xyz="0 0 -1"/>
+            <dynamics damping="0.1" friction="0.1"/>
+        </joint>
+
+        <!-- ========== RIGHT WHEEL ========== -->
+        <link name="${prefix}Right_Wheel_Link">
+            <inertial>
+                <origin xyz="4.5224E-05 -1.848E-05 0.0040127" rpy="0 0 0"/>
+                <mass value="7.4872"/>
+                <inertia ixx="0.023077" ixy="5.6217E-06" ixz="-3.3885E-06" iyy="0.023088" iyz="1.3847E-06" izz="0.043271"/>
+            </inertial>
+
+            <visual>
+                <geometry>
+                    <mesh filename="package://${mesh_pkg}/meshes/Right_Wheel_Link.STL"/>
+                </geometry>
+                <material name="orange">
+                    <color rgba="1 0.3 0.1 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <mesh filename="package://${mesh_pkg}/meshes/Right_Wheel_Link.STL"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}Right_Wheel_Center_Point" type="continuous">
+            <origin xyz="9.6581E-05 -0.19 0.075" rpy="1.5708 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}Right_Wheel_Link"/>
+            <axis xyz="0 0 -1"/>
+            <dynamics damping="0.1" friction="0.1"/>
+        </joint>
+
+        <!-- ========================================================= -->
+        <!--  CASTER WHEELS -->
+        <!-- ========================================================= -->
+        <xacro:macro name="caster_wheel" params="name xyz">
+            <link name="${prefix}${name}">
+                <visual>
+                    <geometry>
+                        <mesh filename="package://${mesh_pkg}/meshes/${name}.STL"/>
+                    </geometry>
+                    <material name="black">
+                        <color rgba="0 0 0 1"/>
+                    </material>
+                </visual>
+                <collision>
+                    <geometry>
+                        <mesh filename="package://${mesh_pkg}/meshes/${name}.STL"/>
+                    </geometry>
+                </collision>
+            </link>
+        </xacro:macro>
+
+        <!-- four casters -->
+        <xacro:caster_wheel name="L_B_Caster_W_Link" xyz="0.3 -0.15 0.06"/>
+        <joint name="${prefix}L_B_Caster_W_Center_Point" type="fixed">
+            <origin xyz="0.3 -0.15 0.06" rpy="1.5708 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}L_B_Caster_W_Link"/>
+        </joint>
+
+        <xacro:caster_wheel name="L_F_Caster_W_link" xyz="-0.2945 -0.15 0.06"/>
+        <joint name="${prefix}L_F_Caster_W_Center_Point" type="fixed">
+            <origin xyz="-0.2945 -0.15 0.06" rpy="1.5708 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}L_F_Caster_W_link"/>
+        </joint>
+
+        <xacro:caster_wheel name="R_F_Caster_W_link" xyz="-0.2945 0.15 0.06"/>
+        <joint name="${prefix}R_F_Caster_W_Center_Point" type="fixed">
+            <origin xyz="-0.2945 0.15 0.06" rpy="1.5708 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}R_F_Caster_W_link"/>
+        </joint>
+
+        <xacro:caster_wheel name="R_B_Caster_W_Link" xyz="0.3 0.15 0.06"/>
+        <joint name="${prefix}R_B_Caster_W_Center_Point" type="fixed">
+            <origin xyz="0.3 0.15 0.06" rpy="1.5708 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}R_B_Caster_W_Link"/>
+        </joint>
+
+
+
+    </xacro:macro>
+</robot>
