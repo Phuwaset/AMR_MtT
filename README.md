@@ -97,5 +97,15 @@ ament_package()
 ```bash
 ros2 launch amrmtt_robot launch_sim.launch.py world:=my_world.sdf
 ```
+## http://gazebosim.org/docs/fortress/getstarted/ Docs / Gazebo Fortress 
+
+
+```bash
+gz sim shapes.sdf  # Fortress uses "ign gazebo" instead of "gz sim"
+
+gz sim shapes.sdf -v 4  # Fortress uses "ign gazebo" instead of "gz sim"
+
+gz sim -s shapes.sdf -v 4  # Fortress uses "ign gazebo" instead of "gz sim"
+
 ```
 
