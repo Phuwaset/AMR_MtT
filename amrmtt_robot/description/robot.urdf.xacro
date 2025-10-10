@@ -7,4 +7,6 @@
   <!-- เรียกใช้ macro หลัก -->
   <xacro:robot_core mesh_pkg="amrmtt_robot" prefix=""/>
 
+  
+
 </robot>
