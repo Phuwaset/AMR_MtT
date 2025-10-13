@@ -109,24 +109,3 @@ gz sim -s shapes.sdf -v 4  # Fortress uses "ign gazebo" instead of "gz sim"
 
 ```
 
-## Problem if you command gazebo on your terminal but the UI is not available.
-ตรวจสอบว่ามี gazebo อยู่ในเครื่องหรือไม่
-```bash
-which gazebo
-```
-
-รันแบบ verbose เพื่อดู log
-```bash
-gazebo --verbose
-```
-
-แต่สาเหตุที่มัน “ไม่ขึ้น GUI” และค้างแบบนี้ เป็นเพราะ
-```bash
-[Err] [Master.cc:96] EXCEPTION: Unable to start server[bind: Address already in use].
-There is probably another Gazebo process running.
-```
-
-check process
-```bash
-ps aux | grep gazebo
-```
