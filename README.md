@@ -92,3 +92,25 @@ ament_package()
 </package>
 
 ```
+## unstall Gazebo Fortress
+
+```bash
+sudo apt remove --purge gz-* ignition-*
+sudo apt autoremove
+
+# PATH / ENV
+export GZ_CONFIG_PATH=...
+export PATH=$PATH:/usr/bin/gz
+source /usr/share/gz/gz-fortress*/setup.sh
+
+source ~/.bashrc
+
+```
+
+## install gazebo classic
+```bash
+sudo apt update
+sudo apt install gazebo
+sudo apt install ros-humble-gazebo-ros-pkgs ros-humble-gazebo-ros
+``` 
+
