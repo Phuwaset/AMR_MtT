@@ -112,5 +112,10 @@ source ~/.bashrc
 sudo apt update
 sudo apt install gazebo
 sudo apt install ros-humble-gazebo-ros-pkgs ros-humble-gazebo-ros
+
+echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc
+echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/your_ws/install/share' >> ~/.bashrc
+source ~/.bashrc
+
 ``` 
 
